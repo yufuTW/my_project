@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Pair Stair</title>
+</head>
+<body>
+
+<div id="stairs">
+    <table>
+        <tr>
+            <th></th>
+            {% for programmer in programmers_for_columns %}
+                <th class="column">
+                    <span class='name_col'>{{ programmer.name }}</span>
+                </th>
+            {% endfor %}
+        </tr>
+        {% for programmer_1 in programmers_for_rows %}
+            <tr class="row">
+                <td>
+                    <span class='name_row'>{{ programmer_1.name }}</span>
+                </td>
+                {% for programmer_2 in programmers_for_columns %}
+                    {% if programmer_1 != programmer_2 %}
+                        <td class='pair'>
+                            {% for pair in pairs %}
+                                {% if pair.programmer_one == programmer_1.name and pair.programmer_two == programmer_2.name %}
+                                    <a href="/increase_pair_times/{{ programmer_1.name }}/{{ programmer_2.name }}">{{ pair.times }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
